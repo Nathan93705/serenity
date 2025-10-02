@@ -33,6 +33,7 @@ import {
   SimulationCallback,
   SimulationInstance
 } from "./simulation";
+import { DefaultWhitelistProperties, Whitelist } from "./whitelist";
 
 import type {
   ServerEvents,
@@ -47,6 +48,7 @@ const DefaultSerenityProperties: SerenityProperties = {
   permissions: "./permissions.json",
   resources: DefaultResourcesProperties,
   movementValidation: true,
+  whitelist: DefaultWhitelistProperties,
   movementHorizontalThreshold: 0.4,
   movementVerticalThreshold: 0.6,
   shutdownMessage: "Server is shutting down.",
@@ -105,6 +107,11 @@ class Serenity extends Emitter<WorldEventSignals & ServerEvents> {
    * The permissions interface for the server.
    */
   public readonly permissions: IPermissions<PermissionGroup, PermissionMember>;
+
+  /**
+   * The whitelist entries for the server.
+   */
+  public whitelist: Whitelist;
 
   /**
    * The resource pack manager for the server.
@@ -235,6 +242,17 @@ class Serenity extends Emitter<WorldEventSignals & ServerEvents> {
       typeof this.properties.resources === "string"
         ? new Resources({ path: this.properties.resources })
         : new Resources(this.properties.resources);
+
+    // Create the whitelist for the server
+    this.whitelist = new Whitelist({
+      ...DefaultWhitelistProperties,
+      ...this.properties.whitelist,
+    });
+
+    // Load the whitelist entries from the specified path
+    this.whitelist.entries = this.whitelist.readWhitelist(this.whitelist.path);
+    this.whitelist.writeWhitelist(this.whitelist.path);
+    console.log(this.whitelist.entries);
 
     // Write the properties to the properties path
     if (properties?.path) this.writeProperties(properties.path);
@@ -398,6 +416,9 @@ class Serenity extends Emitter<WorldEventSignals & ServerEvents> {
     // Write the permissions to the permissions path
     if (typeof this.properties.permissions === "string")
       this.writePermissions(this.properties.permissions);
+
+    // Write the whitelist to the whitelist path
+    this.whitelist.writeWhitelist(this.whitelist.path);
   }
 
   /**

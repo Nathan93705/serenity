@@ -11,3 +11,4 @@ export * from "./resource";
 export * from "./components";
 export * from "./permissions";
 export * from "./rawtext";
+export * from "./whitelist";

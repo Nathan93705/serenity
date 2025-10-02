@@ -81,6 +81,25 @@ class LoginHandler extends NetworkHandler {
         DisconnectReason.WorldCorruption
       );
 
+    // Get the server whitelist
+    const whitelist = this.serenity.whitelist;
+
+    // Check if the whitelist is enabled,
+    // and if so, check if the player is whitelisted.
+    if (whitelist.enabled) {
+      const entry = { xuid, name: username };
+      if (!whitelist.isWhitelisted(entry)) {
+        return this.network.disconnectConnection(
+          connection,
+          whitelist.kickMessage,
+          DisconnectReason.NoReason
+        );
+      }
+
+      // Update the whitelist entry with missing data.
+      whitelist.updateEntry(entry, entry);
+    }
+
     // Create a new ClientSystemInfo instance.
     const clientSystemInfo = new ClientSystemInfo(
       clientData.DeviceId,

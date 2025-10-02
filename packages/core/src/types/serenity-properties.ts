@@ -3,6 +3,7 @@ import { RaknetServerProperties } from "@serenityjs/raknet";
 import { NetworkProperties } from "../network";
 import { ResourcesProperties } from "../resources";
 
+import { WhitelistProperty } from "./whitelist";
 import { IPermissions } from "./permissions";
 
 interface SerenityProperties {
@@ -11,6 +12,7 @@ interface SerenityProperties {
   movementValidation: boolean;
   movementHorizontalThreshold: number;
   movementVerticalThreshold: number;
+  whitelist: Partial<WhitelistProperty>;
   shutdownMessage: string;
   ticksPerSecond: number;
   debugLogging: boolean;
