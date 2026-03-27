@@ -79,7 +79,7 @@ class DataStoreUpdate extends DataStoreChangeInfo {
     // Switch on the type of the value to read the appropriate value from the stream based on its type
     switch (valueType) {
       case 0: {
-        value = stream.readFloat64(Endianness.Little);
+        value = stream.readFloat32(Endianness.Little);
         break;
       }
 
@@ -122,7 +122,7 @@ class DataStoreUpdate extends DataStoreChangeInfo {
     // Determine the type of the value and write the appropriate type identifier to the binary stream
     if (typeof value.value === "number") {
       stream.writeVarInt(0);
-      stream.writeFloat64(value.value, Endianness.Little);
+      stream.writeFloat32(value.value, Endianness.Little);
     } else if (typeof value.value === "boolean") {
       stream.writeVarInt(1);
       stream.writeBool(value.value);

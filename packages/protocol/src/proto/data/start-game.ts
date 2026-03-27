@@ -24,7 +24,7 @@ import {
 import {
   Uuid,
   Vector3f,
-  BlockPosition,
+  SignedBlockPosition,
   GameRules,
   Experiments,
   NetworkBlockTypeDefinition,
@@ -50,11 +50,11 @@ class StartGamePacket extends DataPacket {
   @Serialize(ZigZag) public worldGamemode!: Gamemode;
   @Serialize(Bool) public hardcore!: boolean;
   @Serialize(ZigZag) public difficulty!: Difficulty;
-  @Serialize(BlockPosition) public spawnPosition!: BlockPosition;
+  @Serialize(SignedBlockPosition) public spawnPosition!: SignedBlockPosition;
   @Serialize(Bool) public achievementsDisabled!: boolean;
   @Serialize(ZigZag) public editorWorldType!: number;
-  @Serialize(Bool) public createdInEdior!: boolean;
-  @Serialize(Bool) public exportedFromEdior!: boolean;
+  @Serialize(Bool) public createdInEditor!: boolean;
+  @Serialize(Bool) public exportedFromEditor!: boolean;
   @Serialize(ZigZag) public dayCycleStopTime!: number;
   @Serialize(ZigZag) public eduOffer!: number;
   @Serialize(Bool) public eduFeatures!: boolean;
@@ -98,7 +98,7 @@ class StartGamePacket extends DataPacket {
   @Serialize(Bool) public experimentalGameplayOverride!: boolean;
   @Serialize(Uint8) public chatRestrictionLevel!: number;
   @Serialize(Bool) public disablePlayerInteractions!: boolean;
-  @Serialize(VarString) public levelIdentfier!: string;
+  @Serialize(VarString) public levelIdentifier!: string;
   @Serialize(VarString) public levelName!: string;
   @Serialize(VarString) public premiumWorldTemplateId!: string;
   @Serialize(Bool) public isTrial!: boolean;

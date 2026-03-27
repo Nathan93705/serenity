@@ -2,7 +2,7 @@ import { VarLong, ZigZag } from "@serenityjs/binarystream";
 import { Proto, Serialize } from "@serenityjs/raknet";
 
 import { type PlayerActionType, Packet } from "../../enums";
-import { BlockPosition } from "../types";
+import { SignedBlockPosition } from "../types";
 
 import { DataPacket } from "./data-packet";
 
@@ -10,8 +10,8 @@ import { DataPacket } from "./data-packet";
 class PlayerActionPacket extends DataPacket {
   @Serialize(VarLong) public entityRuntimeId!: bigint;
   @Serialize(ZigZag) public action!: PlayerActionType;
-  @Serialize(BlockPosition) public blockPosition!: BlockPosition;
-  @Serialize(BlockPosition) public resultPosition!: BlockPosition;
+  @Serialize(SignedBlockPosition) public blockPosition!: SignedBlockPosition;
+  @Serialize(SignedBlockPosition) public resultPosition!: SignedBlockPosition;
   @Serialize(ZigZag) public face!: number;
 }
 

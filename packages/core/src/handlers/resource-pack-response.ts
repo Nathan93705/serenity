@@ -153,8 +153,8 @@ class ResourcePackClientResponseHandler extends NetworkHandler {
         packet.spawnPosition = player.dimension.spawnPosition;
         packet.achievementsDisabled = true;
         packet.editorWorldType = 0;
-        packet.createdInEdior = false;
-        packet.exportedFromEdior = false;
+        packet.createdInEditor = false;
+        packet.exportedFromEditor = false;
         packet.dayCycleStopTime = player.world.dayTime;
         packet.eduOffer = 0;
         packet.eduFeatures = true;
@@ -209,7 +209,7 @@ class ResourcePackClientResponseHandler extends NetworkHandler {
         packet.experimentalGameplayOverride = false;
         packet.chatRestrictionLevel = 0;
         packet.disablePlayerInteractions = false;
-        packet.levelIdentfier = "SerenityJS";
+        packet.levelIdentifier = "SerenityJS";
         packet.levelName = player.world.identifier;
         packet.premiumWorldTemplateId = player.world.identifier;
         packet.isTrial = false;
